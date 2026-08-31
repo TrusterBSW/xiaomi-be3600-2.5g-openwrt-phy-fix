@@ -1,0 +1,11 @@
+# Never commit firmware images. They are derivatives of Xiaomi's proprietary
+# build and contain Qualcomm QSDK binary blobs -- redistributing them is not
+# ours to do. Apply patch_phy.py to your own image instead.
+*.bin
+*.fit
+*.mbn
+*.ubi
+*.img
+
+__pycache__/
+*.pyc

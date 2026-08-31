@@ -1,0 +1,50 @@
+# Broken: stock vendor image, PHY declared at MDIO address 0
+
+[    8.874831] urandom-seed: Seed file not found (/etc/urandom.seed)
+[    8.881882] procd: - early -
+[    8.881931] procd: - watchdog -
+[    9.451393] procd: - watchdog -
+[    9.451636] procd: - ubus -
+[    9.517973] procd: - init -
+Please press Enter to activate this console.
+Loading cnss2: 
+[    9.578299] cnss[2]: INFO: QDSS va: 0x9963ed43, pa: 0x49f00000
+[    9.578356] cnss[2]: INFO: Platform driver probed successfully. plat 0xba4e4c8a tgt 0xfff9
+[    9.584725] cnss[61]: INFO: QDSS va: 0x9da607da, pa: 0x49400000
+[    9.591289] cnss[61]: INFO: Platform driver probed successfully. plat 0x56b60ca3 tgt 0xfff7
+[    9.598049] cnss: INFO: cnss_plat_ipc_qmi_svc_init: CNSS Platform IPC QMI Service is started
+[    9.703869] ubi: mtd19 is already attached to ubi0
+[    9.771001] urngd: v1.0.2 started.
+[    9.958996] cnss: INFO: cnss_plat_ipc_qmi_reg_client_req_handler: QMI Client Connected. QMI Socket Node: 1 Port: 16393 ID: 1
+[    9.959024] cnss: INFO: CNSS Daemon connected
+[    9.970557] cnss: INFO: cnss_plat_ipc_qmi_init_setup_req_handler: MAC: 0 HW_TRC: 0 CAL: 0
+ WIFI FW mount is successful
+No PFM license files in partition to load
+[   10.352375] S01license-pfm (257): drop_caches: 3
+[   11.897268] ssdk_dt_parse[1294]:INFO:>>>>>>>ssdk switch macmode 0xc  macmode1 0xc  macmode2 0xff
+[   11.897409] ssdk_dt_parse_interrupt[908]:INFO:intr-gpio does not exist
+[   11.907956] ssdk_phy_driver_init[373]:INFO:dev_id = 0, phy_adress = 0, phy_id = 0xffffffff phytype doesn't match
+[   12.161421] qca_appe_tdm_hw_init[279]:INFO:mppe scheduler tdm mode = 0, num = 10
+[   12.161449] qca_appe_tdm_hw_init[321]:INFO:mppe bm mode = 0 setup num= 32
+[   12.309873] qca_hppe_interface_mode_init[1479]:INFO:mppe interface mode initialization
+[   12.309984] qca_appe_portctrl_hw_init[412]:INFO:appe portctrl initialization
+[   12.319039] qca_appe_rss_hash_hw_init[600]:INFO:appe rss hash initialization: hash_seed 0x8d070537
+[   12.323906] regi_init[3594]:INFO:Initializing APPE Done!!
+[   12.333190] regi_init[3661]:INFO:qca-ssdk module init succeeded!
+acfg_tool: Issuing blocking call to wait for events
+[   12.742370] nat46: module (version 1182f30785e4274913f01a8c3d7e1b5437ae3819) loaded.
+[   12.760238] dp1: ppe offload disabled: 0 for macid 2
+[   12.760313] nss-dp 3a504000.dp1 (unnamed net_device) (uninitialized): netif_napi_add() called with weight 256
+[   12.766472] dp2: ppe offload disabled: 0 for macid 1
+[   12.774271] libphy: PHY 90000.mdio:00 not found
+[   13.068865] nss-dp: probe of 3a500000.dp2 failed with error -14
+[   13.069006] **********************************************************
+[   13.073582] * NSS Data Plane driver
+[   13.080211] **********************************************************
+
+# ... and then, once per second, forever:
+
+[   20.328832] hsl_phy_phydev_get[805]:ERROR:phy_addr 0 phydev is NULL
+[   21.382112] hsl_phy_phydev_get[805]:ERROR:phy_addr 0 phydev is NULL
+[   22.408798] hsl_phy_phydev_get[805]:ERROR:phy_addr 0 phydev is NULL
+[   23.458788] hsl_phy_phydev_get[805]:ERROR:phy_addr 0 phydev is NULL

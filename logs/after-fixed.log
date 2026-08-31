@@ -1,0 +1,18 @@
+# Fixed: PHY address corrected to 12 in all three device-tree properties
+# (boot log, kernel messages only)
+
+[    9.314758] qca808x_phy_api_ops_init[1844]:INFO:qca probe qca808x phy driver succeeded!
+[   10.071080] dp1: ppe offload disabled: 0 for macid 2
+[   10.071150] nss-dp 3a504000.dp1 (unnamed net_device) (uninitialized): netif_napi_add() called with weight 256
+[   10.079433] dp2: ppe offload disabled: 0 for macid 1
+[   13.769042] nss-dp 3a500000.dp2 eth1: PHY Link up speed: 2500
+
+# No 'hsl_phy_phydev_get' error remains (was once per second before):
+#   root@OpenWrt:/# dmesg | grep -c hsl_phy
+#   0
+
+# The interface now exists and negotiates 2.5G:
+#   root@OpenWrt:/# ethtool eth1
+#           Speed: 2500Mb/s
+#           Duplex: Full
+#           Link detected: yes
