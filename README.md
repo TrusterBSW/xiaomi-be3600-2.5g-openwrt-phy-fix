@@ -1,4 +1,10 @@
-# Xiaomi BE3600 2.5G — fixing the dead 2.5G port under OpenWrt
+# Xiaomi BE3600 2.5G (RD15) — fixing the dead 2.5G port under OpenWrt
+
+> **Hardware:** Xiaomi Router BE3600 2.5G, hardware model **RD15** — IPQ5332,
+> 256 MB RAM. See [Identifying your device](#identifying-your-device).
+>
+> **No support is provided.** Read [About this repository](#about-this-repository)
+> before opening an issue.
 
 The unofficial OpenWrt images floating around for the **Xiaomi Router BE3600 2.5G
 (RD15, IPQ5332)** leave the 2.5 Gb/s port completely dead: `eth1` never appears
@@ -22,6 +28,39 @@ nss-dp 3a500000.dp2 eth1: PHY Link up speed: 2500
         Duplex: Full
         Link detected: yes
 ```
+
+## Identifying your device
+
+This applies to the **RD15** hardware revision — the BE3600 2.5G, the one with a
+2.5 Gb/s socket and three gigabit ones. The **RD16** (512 MB RAM) is a different
+board and was not looked at.
+
+The vendor device tree does not spell out "RD15" (it says `Xiamo Be3600` —
+the manufacturer's own typo), so check one of these:
+
+On **stock Xiaomi firmware**, over SSH or telnet:
+
+```console
+# grep HARDWARE /etc/config/fw_ver
+        option HARDWARE 'RD15'
+# nvram get model
+RD15
+```
+
+On the **vendor OpenWrt build** this fix targets:
+
+```console
+# cat /proc/device-tree/model
+Xiamo Be3600, Inc. IPQ5332/AP-MI04.1-C2
+# cat /etc/openwrt_release
+DISTRIB_RELEASE='19.07-SNAPSHOT'
+DISTRIB_TARGET='ipq53xx/ipq53xx_32'
+DISTRIB_REVISION='R24.7'
+DISTRIB_DESCRIPTION='Nwrt (QSDK 12.4) '
+```
+
+Kernel `5.4.213`, image built 2024-06-27. Other builds may differ; the patch
+script refuses to touch anything whose values are not exactly what it expects.
 
 ## Symptoms
 
@@ -194,6 +233,26 @@ The patch script removes the need: apply it to whichever image you already have.
   [does not support this device](https://forum.openwrt.org/t/does-xiaomi-be3600-rd15-support-openwrt/188234)
   — ipq53xx is unported and 256 MB of RAM is considered a dead end upstream.
 * The RD16 variant (512 MB) is a different board and was not looked at.
+
+## About this repository
+
+The diagnosis and the code here were produced by **Claude** (Anthropic's Claude
+Opus, run through Claude Code), working with me on the actual device: reading
+the vendor device tree, scanning the MDIO bus over SSH, writing and verifying
+the patch script, and confirming the result on the running router over a serial
+console. Every log in this repository was captured from that hardware.
+
+I am publishing it because it works and nobody had documented it — not because
+I can maintain it. **I will not be able to provide support.** I do not have the
+background to debug someone else's device, and issues or questions will most
+likely go unanswered. Please do not read silence as rudeness; it is honesty
+about what I can offer.
+
+So: take what is useful, fork it, adapt it. Everything needed to redo the
+reasoning from scratch is written down above — the MDIO scan, the three
+properties, the hash and UBI constraints — precisely so that nobody has to
+depend on me. And read [Scope and caveats](#scope-and-caveats) before flashing
+anything: this was verified on one unit, not on yours.
 
 ## Credits
 
